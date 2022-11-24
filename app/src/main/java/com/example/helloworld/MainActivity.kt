@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var button : Button
+    lateinit var fragmentButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +18,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.d("Test", "Inside onCreate")
 
         button = findViewById(R.id.button)
+        fragmentButton = findViewById(R.id.button2)
+
+
         button.setOnClickListener(this)
+        fragmentButton.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
@@ -27,6 +32,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val intent = Intent(this, SecondActivity::class.java)
                 startActivity(intent)
             }
+            R.id.button2->{
+                // Open the next activity
+                val intent = Intent(this, MyFragmentActivity::class.java)
+                startActivity(intent)
+            }
+
         }
     }
 

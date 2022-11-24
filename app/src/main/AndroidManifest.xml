@@ -26,6 +26,10 @@
             android:name=".SecondActivity"
             >
         </activity>
+        <activity
+            android:name=".MyFragmentActivity"
+            >
+        </activity>
     </application>
 
 </manifest>
