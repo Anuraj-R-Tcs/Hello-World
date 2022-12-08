@@ -1,16 +1,21 @@
 package com.example.helloworld
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.helloworld.broadcasts.AirplaneModeChangeReceiver
+import com.example.helloworld.broadcasts.ConnectivityChangeBroadcast
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var button : Button
     lateinit var fragmentButton : Button
+
+    lateinit var reciver : AirplaneModeChangeReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +28,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         button.setOnClickListener(this)
         fragmentButton.setOnClickListener(this)
+
+        reciver = AirplaneModeChangeReceiver()
+        IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED).also {
+            registerReceiver(reciver,it)
+        }
+
     }
 
     override fun onClick(view: View?) {
@@ -64,6 +75,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onDestroy() {
         super.onDestroy()
         Log.d("Test", "Inside onDestroy")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("Test", "Inside onStop")
+        unregisterReceiver(reciver)
     }
 }
 
